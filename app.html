@@ -1,54 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>App</title>
-<script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Detail | APKStoreHaiti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background:#050505; color:white; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .stats-border { border-right: 1px solid rgba(255, 255, 255, 0.1); }
+        .stats-border:last-child { border-right: none; }
+    </style>
 </head>
 
-<body class="bg-black text-white p-6">
+<body class="p-6">
 
-<div id="app"></div>
+    <div class="max-w-xl mx-auto mb-10">
+        <a href="index.html" class="text-gray-500 flex items-center gap-2 hover:text-white transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Retour au Store
+        </a>
+    </div>
 
-<script>
-const apps = {
-  elit: {
-    name: "ELIT PARYAJ",
-    desc: "Analyse football avec IA",
-    apk: "apps/elitparyaj.apk",
-    downloads: "39K+",
-    rating: "★★★★★"
-  },
-  kiskey: {
-    name: "EXAMPRO HAITI",
-    desc: "Assistant éducatif IA",
-    apk: "apps/kiskey_ai.apk",
-    downloads: "115K+",
-    rating: "★★★★★"
-  }
-};
+    <div id="app-container" class="max-w-xl mx-auto">
+        </div>
 
-const params = new URLSearchParams(window.location.search);
-const key = params.get("app");
-const app = apps[key];
+    <script>
+        const apps = {
+          elit: {
+            name: "ELIT PARYAJ",
+            category: "SPORTS / AI PREDICTIONS",
+            icon: "⚽",
+            color: "from-orange-500 to-red-600",
+            btnColor: "bg-orange-600",
+            desc: "Analyses de matchs en temps réel par des experts en paris sportifs. Prediksyon ki baze sou estatistik pou tout parè yo.",
+            apk: "apps/elitparyaj.apk",
+            downloads: "37K+",
+            rating: "4.9",
+            size: "12 MB",
+            version: "2.1"
+          },
+          kiskey: {
+            name: "EXAMPRO HAITI",
+            category: "EDUCATION / ASSISTANT",
+            icon: "🤖",
+            color: "from-blue-600 to-indigo-700",
+            btnColor: "bg-blue-600",
+            desc: "L'IA qui vous aide à réviser vos examens. Dashboard et assistance personnalisée pour les étudiants haïtiens. Votre futur commence ici.",
+            apk: "apps/kiskey_ai.apk",
+            downloads: "75K+",
+            rating: "5.0",
+            size: "8.5 MB",
+            version: "1.0"
+          }
+        };
 
-if(app){
-document.getElementById("app").innerHTML = `
-<h1 class="text-3xl font-bold mb-2">${app.name}</h1>
-<p class="text-gray-400 mb-2">${app.desc}</p>
+        const params = new URLSearchParams(window.location.search);
+        const key = params.get("app");
+        const app = apps[key];
 
-<p class="mb-2">📥 ${app.downloads}</p>
-<p class="mb-6 text-yellow-400">${app.rating}</p>
+        if(app){
+            document.getElementById("app-container").innerHTML = `
+                <div class="flex gap-6 items-center mb-8">
+                    <div class="w-24 h-24 rounded-[2rem] bg-gradient-to-tr ${app.color} flex items-center justify-center text-4xl shadow-2xl shadow-black">
+                        ${app.icon}
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-black tracking-tighter uppercase">${app.name}</h1>
+                        <p class="text-orange-500 font-bold text-xs tracking-widest mt-1">${app.category}</p>
+                        <p class="text-gray-500 text-xs mt-1">Version ${app.version}</p>
+                    </div>
+                </div>
 
-<a href="${app.apk}" download
-class="block bg-white text-black py-4 text-center rounded-xl font-bold">
-TELECHARGE APK
-</a>
-`;
-}else{
-document.getElementById("app").innerHTML = "App introuvable";
-}
-</script>
+                <div class="glass flex justify-between p-4 rounded-2xl mb-8 text-center">
+                    <div class="stats-border flex-1">
+                        <p class="text-[10px] text-gray-500 uppercase font-bold">Notes</p>
+                        <p class="font-bold">${app.rating} ★</p>
+                    </div>
+                    <div class="stats-border flex-1">
+                        <p class="text-[10px] text-gray-500 uppercase font-bold">Taille</p>
+                        <p class="font-bold">${app.size}</p>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-[10px] text-gray-500 uppercase font-bold">Downloads</p>
+                        <p class="font-bold">${app.downloads}</p>
+                    </div>
+                </div>
+
+                <div class="mb-10">
+                    <h3 class="text-lg font-bold mb-3">À propos</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        ${app.desc}
+                    </p>
+                </div>
+
+                <div class="mb-10">
+                    <h3 class="text-lg font-bold mb-3">Captures d'écran</h3>
+                    <div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+                        <div class="min-w-[150px] h-260px glass rounded-xl flex items-center justify-center text-gray-700 font-black italic">PREVIEW 1</div>
+                        <div class="min-w-[150px] h-[260px] glass rounded-xl flex items-center justify-center text-gray-700 font-black italic">PREVIEW 2</div>
+                    </div>
+                </div>
+
+                <a href="${app.apk}" download class="block w-full ${app.btnColor} py-5 text-center rounded-[1.5rem] font-black text-lg shadow-lg hover:scale-[1.02] transition-transform active:scale-95">
+                    TÉLÉCHARGER L'APK
+                </a>
+                
+                <p class="text-center text-gray-600 text-[10px] mt-6 uppercase tracking-widest font-medium">
+                    Scanné par Rezonex Anti-Virus • 100% SÉCURISÉ
+                </p>
+            `;
+        } else {
+            document.getElementById("app-container").innerHTML = `
+                <div class="text-center py-20">
+                    <h2 class="text-2xl font-bold mb-4">Oups !</h2>
+                    <p class="text-gray-500">Cette application n'existe pas encore dans notre base Titan.</p>
+                </div>
+            `;
+        }
+    </script>
 
 </body>
 </html>
